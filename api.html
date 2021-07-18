@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Rooh API</title>
+    <style>
+        .section-preview {
+            border: 1px solid #e0e0e0;
+            padding: 15px;
+        }
+        
+        body p {
+            font-family: 'Almarai';
+            line-height: 30px;
+        }
+        
+        .font {
+            font-family: 'Almarai';
+        }
+    </style>
+    <link rel="icon" href="http://roooh10.com/wp-content/uploads/2020/03/cropped-روح-القصيد-1-32x32.png" sizes="32x32" />
+    <link rel="icon" href="http://roooh10.com/wp-content/uploads/2020/03/cropped-روح-القصيد-1-192x192.png" sizes="192x192" />
+    <link href="https://fonts.googleapis.com/css2?family=Almarai&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.16.0/css/mdb.min.css" rel="stylesheet">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.16.0/js/mdb.min.js"></script>
+</head>
+
+<body dir="rtl" style="text-align: right;max-width: 900px; margin: auto; margin-bottom: 30px; box-shadow: 0 0 19px #0000004a;">
+
+    <div class="card card-intro sky-gradient" style="background: linear-gradient(to right,#0acffe 0,#495aff);">
+        <div class="card-body white-text rgba-black-light text-center">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-6">
+                    <h1 class="font-weight-bold h2">Rooh API</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-wrapper">
+        <div class="container-fluid">
+            <br>
+
+            <section>
+                <div class="card">
+                    <div class="card-body">
+                        <p class="h5 my-4">API روح القصيد</p>
+                        <p>شكل الرابط الخاص بال API لروح القصيد هو</p>
+                        <p class="h4 note note-primary" style="text-align: left;border: unset;" dir="ltr">
+                            <small>http://www.roooh10.com/?</small>request<small>=</small><i><small>request_type</small></i><code>&</code>params<small>=</small><small><i>values</i></small>
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <br>
+            <hr />
+            <br>
+
+            <section>
+                <p class="h5 my-4">الطلبات المتاحة (requests)</p>
+                <p>الطلبات المتاحة حاليا هي</p>
+                <ul dir="ltr" style="text-align: left;">
+                    <li><pre>get_post</pre></li>
+                    <li><pre>get_posts</pre></li>
+                    <li><pre>get_post_by</pre></li>
+                    <li><pre>get_posts_by</pre></li>
+                    <li><pre>get_posts_count</pre></li>
+                    <li><pre>get_pages_count</pre></li>
+                    <li><pre>get_category</pre></li>
+                    <li><pre>get_categories</pre></li>
+                    <li><pre>delete_post</pre></li>
+                    <li><pre>update_post</pre></li>
+                    <li><pre>insert_post</pre></li>
+                    <li><pre>get_updates <code>*</code></pre></li>
+                </ul>
+            </section>
+
+            <section>
+                <div class="divider-new">
+                    <h2>&nbsp;get_post&nbsp;</h2>
+                </div>
+                <p class="h4 my-4">مقدمة عامة للبوستات:</p>
+                <p>لدى كل بوست (post) عدة قيم (حقول) هي:</p>
+                <p class="note note-primary" style="text-align: left;border: unset;line-height: 27px;" dir="ltr">
+                    <kbd>id</kbd> <kbd>title</kbd> <kbd>post_date</kbd> <kbd>post_date_gtm</kbd> <kbd>post_content</kbd> <kbd>post_status</kbd> <kbd>post_name</kbd> <kbd>post_modified</kbd> <kbd>post_modified_gtm</kbd> <kbd>category</kbd> <kbd>categories</kbd>                    <kbd>thumbnail</kbd> <kbd>url</kbd>
+                </p>
+                <p>شرح هذه الحقول كما يلي:</p>
+                <div class="mt-1 card-header border-0 font-weight-bold d-flex justify-content-between">
+                    <p class="mr-4 mb-0"><code>id</code><span style="font-weight: 400;">&nbsp;&nbsp;  رقم البوست</span></p>
+                </div>
+                <div class="mt-1 card-header border-0 font-weight-bold d-flex justify-content-between">
+                    <p class="mr-4 mb-0"><code>title</code><span style="font-weight: 400;">&nbsp;&nbsp;  عنوان البوست على الموقع</span></p>
+                </div>
+                <div class="mt-1 card-header border-0 font-weight-bold d-flex justify-content-between">
+                    <p class="mr-4 mb-0"><code>post_date</code><span style="font-weight: 400;">&nbsp;&nbsp;  تاريخ إنشاء البوست (بالتوقيت المحلي - توقيت الموقع)</span></p>
+                </div>
+                <div class="mt-1 card-header border-0 font-weight-bold d-flex justify-content-between">
+                    <p class="mr-4 mb-0"><code>post_date_gtm</code><span style="font-weight: 400;">&nbsp;&nbsp;  تاريخ إنشاء البوست بوتوقيت جرينتش</span></p>
+                </div>
+                <div class="mt-1 card-header border-0 font-weight-bold d-flex justify-content-between">
+                    <p class="mr-4 mb-0"><code>post_content</code><span style="font-weight: 400;">&nbsp;&nbsp;  محتوى البوست (القصيدة)</span></p>
+                </div>
+                <div class="mt-1 card-header border-0 font-weight-bold d-flex justify-content-between">
+                    <p class="mr-4 mb-0"><code>post_status</code><span style="font-weight: 400;">&nbsp;&nbsp;  حالة البوست (publish تعني ان البوست منشور، و pending تعني ان البوست في إنتظار المراجعة للنشر، و trashed تعني ان البوست في سلة المهملات)</span></p>
+                </div>
+                <div class="mt-1 card-header border-0 font-weight-bold d-flex justify-content-between">
+                    <p class="mr-4 mb-0"><code>post_name</code><span style="font-weight: 400;">&nbsp;&nbsp;  هو العنوان الذي يظهر كما في الرابط، مثال: https://www.roooh10.com/the-post-name/ فكلمة the-post-name هي المقصودة</span></p>
+                </div>
+                <div class="mt-1 card-header border-0 font-weight-bold d-flex justify-content-between">
+                    <p class="mr-4 mb-0"><code>post_modified</code><span style="font-weight: 400;">&nbsp;&nbsp;  تاريخ آخر تعديل على البوست بالتوقيت المحلي</span></p>
+                </div>
+                <div class="mt-1 card-header border-0 font-weight-bold d-flex justify-content-between">
+                    <p class="mr-4 mb-0"><code>post_modified_gtm</code><span style="font-weight: 400;">&nbsp;&nbsp;  تاريخ آخر تعديل على البوست بتوقيت جرينتش</span></p>
+                </div>
+                <div class="mt-1 card-header border-0 font-weight-bold d-flex justify-content-between">
+                    <p class="mr-4 mb-0"><code>category</code><span style="font-weight: 400;">&nbsp;&nbsp; التصنيف الأساسي ( أول تصنيف يتم إختياره)</span></p>
+                </div>
+                <div class="mt-1 card-header border-0 font-weight-bold d-flex justify-content-between">
+                    <p class="mr-4 mb-0"><code>categories</code><span style="font-weight: 400;">&nbsp;&nbsp; كل التصنيفات لهذا البوست</span></p>
+                </div>
+                <div class="mt-1 card-header border-0 font-weight-bold d-flex justify-content-between">
+                    <p class="mr-4 mb-0"><code>thumbnails</code><span style="font-weight: 400;">&nbsp;&nbsp; هي رابط صورة البوست</span></p>
+                </div>
+                <div class="mt-1 card-header border-0 font-weight-bold d-flex justify-content-between">
+                    <p class="mr-4 mb-0"><code>url</code><span style="font-weight: 400;">&nbsp;&nbsp; هو رابط البوست نفسه يؤدي للبوست على موقع روح القصيد</span></p>
+                </div>
+                <br>
+                <hr>
+                <p class="h4 my-4">تعريف get_posts</p>
+                <p>الأمر get_posts هو أمر للحصول على بوست واحد مفرد بتحديد رقم id الخاص به</p>
+                <br>
+                <p class="h5 my-4">المحددات الخاصة بـ get_post (عددها 2) - (موضحة في الأمثلة)</p>
+                <ul>
+                    <li><pre>id</pre></li>
+                    <li><pre>fields</pre></li>
+                </ul>
+                <br>
+                <p class="h5 my-4">إستخدام get_post كما يلي:</p>
+                <p>رابط ال api الخاص به يكون مثل:</p>
+                <p class="h4 note note-primary" style="text-align: left;border: unset;" dir="ltr">
+                    <small>http://www.roooh10.com/?</small>request<small>=</small><i><small>get_post</small></i><code>&</code>id<small>=</small><small><i>3</i></small>
+                </p>
+                <p>حيث الرقم 3 هو رقم البوست، في هذه الحالي تكون النتيجة هي كل الحقول الخاصة بالبوست رقم 3، أما إذا حال كان المطلوب حقل معين او عدة حقول معينة يكون عن طريق المحدد fields كما يلي: (تفصل بينهم بفاصة كما في المثال)
+                </p>
+                <p class="h4 note note-primary" style="text-align: left;border: unset;" dir="ltr">
+                    <small>http://www.roooh10.com/?</small>request<small>=</small><i><small>get_post</small></i><code>&</code>id<small>=</small><small><i>3</i></small><code>&</code>fields<small>=</small><small><i>id,post_date,thumbnail</i></small>
+                </p>
+                <p>هنا يكون المخرج فقط يحتوى على رقم البوست، تاريخ إنشاءه، الصورة الخاصة به بالنسبة للبوست المحدد (البوست رقم 3) ,
+                    <br><i> * 
+                    إذا لم يحدد رقم البوست (id)  يكون البوست هو آخر بوست تم إنشاءه
+                <br> *
+                إذا لم تحدد قيمة الحقول المطلوبة (fields) تكون النتيجة هي كل الحقول، وكذلك إذا كانت قيمتها هي (fields=all)</i></p>
+                <p>كل المخرجات تكون بترميز jsob_encode مثل</p>
+                <section class="section-preview" dir="ltr" style="text-align: left;">
+                    <pre><code>{
+    "status":true,
+    "result":{
+        "id":3,
+        "post_date":"2020-03-24 13:34:46",
+        "thumbnail":false
+    }
+}</code></pre>
+                </section>
+                <div class="alert alert-dark" role="alert" dir="ltr" style="text-align: left; border-top-right-radius: 0;border-top-left-radius: 0;">
+                    http://www.roooh10.com/?request=get_post&id=3&fields=id,post_date,thumbnail
+                </div>
+
+                <section class="section-preview" dir="ltr" style="text-align: left;">
+                    <pre><code>{
+    "status":true,
+    "result":{
+        "id":13015,
+        "url":"http:\/\/roooh10.com\/%d8%b7%d8%a8%d8%b9%d9%8a-%d8%a7%d8%b4%d9%8a%d9%84-%d8%a7%d9%84%d8%ac%d9%85%d9%8a%d9%84-%d8%a7%d9%83%d8%ab%d8%b1-%d9%85%d9%86-%d8%a7%d9%87%d9%84-%d8%a7%d9%84%d8%ac%d9%85%d9%8a%d9%84\/"
+    }
+}</code></pre>
+                </section>
+                <div class="alert alert-dark" role="alert" dir="ltr" style="text-align: left; border-top-right-radius: 0;border-top-left-radius: 0;">
+                    http://www.roooh10.com/?request=get_post&id=13015&fields=id,url
+                </div>
+            </section>
+
+            <br>
+            <br>
+            <br>
+            <br>
+
+            <section>
+                <div class="divider-new">
+                    <h2>&nbsp;get_posts&nbsp;</h2>
+                </div>
+                <p class="h4 my-4">تعريف get_posts</p>
+                <p>هذا الأمر للحصول على مجموعة بوستات بعدد معين وترتيب معين وبحقول محددة</p>
+                <p class="h4 my-4">المحددات الخاصة به (عددها 9) - (موضحة في الأمثلة)</p>
+                <ul>
+                    <li><pre>post__in</pre></li>
+                    <li><pre>post__not_in</pre></li>
+                    <li><pre>min_id</pre></li>
+                    <li><pre>category__in</pre></li>
+                    <li><pre>category__not_in</pre></li>
+                    <li><pre>fields</pre></li>
+                    <li><pre>order_by</pre></li>
+                    <li><pre>order</pre></li>
+                    <li><pre>count</pre></li>
+                    <li><pre>page</pre></li>
+                </ul>
+                <p>شرح هذه المحددات كما يلي:</p>
+                <div class="mt-1 card-header border-0 font-weight-bold d-flex justify-content-between">
+                    <p class="mr-4 mb-0"><code>post__in</code><span style="font-weight: 400;">&nbsp;&nbsp;  لتحديد مجموعة من ارقام بوستات تكون النتجية فقط من ضمنها،
+                         مثلا 3,4,45,34,23,23 وعند تحديدها لا تخرج النتيجة خارج هذه المجموعة المحددة، عند عدم إستخدام هذا المحدد يتم شمل جميع البوستات</span></p>
+                </div>
+                <div class="mt-1 card-header border-0 font-weight-bold d-flex justify-content-between">
+                    <p class="mr-4 mb-0"><code>post__not_in</code><span style="font-weight: 400;">&nbsp;&nbsp; هو مثل القائمة السوداء، يتم حظر أرقام هذا المحدد من الظهور ضمن النتائج، يتم فصل الأرقام بفاصلة كما في السابق </span></p>
+                </div>
+                <div class="mt-1 card-header border-0 font-weight-bold d-flex justify-content-between">
+                    <p class="mr-4 mb-0"><code>min_id</code><span style="font-weight: 400;">&nbsp;&nbsp; للحصول على القصائد التي لديها رقم معرف id اكبر من او يساوي الرقم المحدد </span></p>
+                </div>
+                <div class="mt-1 card-header border-0 font-weight-bold d-flex justify-content-between">
+                    <p class="mr-4 mb-0"><code>category__in</code><span style="font-weight: 400;">&nbsp;&nbsp; تكون النتيجة حصرا ضمن التصنيف المحدد فقط </span></p>
+                </div>
+                <div class="mt-1 card-header border-0 font-weight-bold d-flex justify-content-between">
+                    <p class="mr-4 mb-0"><code>category__not_in</code><span style="font-weight: 400;">&nbsp;&nbsp; يتم تجنب النتائج التي تتبع لهذا التصنيف </span></p>
+                </div>
+                <div class="mt-1 card-header border-0 font-weight-bold d-flex justify-content-between">
+                    <p class="mr-4 mb-0"><code>fields</code><span style="font-weight: 400;">&nbsp;&nbsp; هي الحقول المطلوبة كما في الجزء الأول تماما، مثل fields=id,post_date وهكذا </span></p>
+                </div>
+                <div class="mt-1 card-header border-0 font-weight-bold d-flex justify-content-between">
+                    <p class="mr-4 mb-0"><code>order_by</code><span style="font-weight: 400;">&nbsp;&nbsp; ترتيب النتائج بحسب: 
+                        <span style="padding-right:20px;"><br><span style="padding-right:20px;"><code>ID</code> : ترتيب بحسب رقم البوست (حالة الاحرف حساسة - الاستخدام بالحروف الكبيرة)
+                        <br><span style="padding-right:20px;"><code>date</code> ترتيب بحسب تاريخ الإنشاء
+                        </span><br><span style="padding-right:20px;"><code>modified</code> ترتيب بحسب تاريخ آخر تعديل
+                        </span><br><span style="padding-right:20px;"><code>rand</code> ترتيب بشكل عشوائي
+                        </span><br><span style="padding-right:20px;"><code>comment_count</code> بعدد التعليقات على البوست في الموقع
+                        </span><br><span style="padding-right:20px;"><code>title</code> ترتيب بحسب العنوان
+                        </span><br><span style="padding-right:20px;"><code>name</code> ترتيب بحسب العنوان على الرابط
+                        </span><br><span style="padding-right:20px;"> * الترتيب الإفتراضي في حال عدم التحديد هو ترتيب بالتاريخ
+                        </span></span>
+                        </span>
+                    </p>
+                </div>
+                <div class="mt-1 card-header border-0 font-weight-bold d-flex justify-content-between">
+                    <p class="mr-4 mb-0"><code>order</code><span style="font-weight: 400;">&nbsp;&nbsp; لتحديد الترتيب تصاعدي أم تنازلي DESC, ACS</span></p>
+                </div>
+                <div class="mt-1 card-header border-0 font-weight-bold d-flex justify-content-between">
+                    <p class="mr-4 mb-0"><code>count</code><span style="font-weight: 400;">&nbsp;&nbsp; عدد نتائج الإستعلام (إذا لم يحدد يتم يكون العدد غير محدد بسقف)، إذا تم تحديد العدد ب 10 مثلا لا تزيد عدد النتائج عنها، 
+                     وإذا كانت النتائج المتاحة اقل من 10 يتم عرضها، في حال وضع -1 في هذا المحدد يتم عرض كل النتائج الممكنة، وفي حال عدم تحديد هذا المحدد تكون عدد النتائج 10 بشكل إفتراضي</span></p>
+                </div>
+                <div class="mt-1 card-header border-0 font-weight-bold d-flex justify-content-between">
+                    <p class="mr-4 mb-0"><code>page</code><span style="font-weight: 400;">&nbsp;&nbsp; هذا المحدد هو رقم صفحة النتائج، فكمثال إذا كانت النتائج هي 34 نتيجة وتم تحديد المحدد count ب 10 تكون هنالك 4 صفحات
+                    <br>الصفحة الأولى من 1 ل 10، الصفحة الثانية من 11 ل 20 الصفحة الثالثة من 21 ل 30 الصفحة الرابعة من 31 ل 34، وبتحديد رقم الصفحة يتم عرض نتائج تلك الصفحة
+                    <br> الإفتراضي لهذا المحدد هو 1 أي الصفحة الأولى، إذا كان المحدد count يحمل الرقم -1 تكون الصفحة الأولى هي كل النتائج
+                </span></p>
+                </div>
+                <br>
+                <p class="h4 my-4">أمثلة</p>
+                <section class="section-preview" dir="ltr" style="text-align: left;">
+                    <pre><code>{
+    "status":true,
+    "result":[
+        {
+            "id":13651,
+            "post_date":"2020-03-19 00:00:00"
+        },
+        {
+            "id":13649,
+            "post_date":"2020-03-19 00:00:00"
+        },
+        {
+            "id":13647,
+            "post_date":"2020-03-19 00:00:00"
+        }
+    ]
+}</code></pre>
+                </section>
+                <div class="alert alert-dark" role="alert" dir="ltr" style="text-align: left; border-top-right-radius: 0;border-top-left-radius: 0;">
+                    http://www.roooh10.com/?request=get_posts&count=3&fields=id,post_date&order_by=date&order=DESC
+                </div>
+                <section class="section-preview" dir="ltr" style="text-align: left;">
+                    <pre><code>{
+    "status":true,
+    "result":[
+        {
+            "id":13649,
+            "post_date":"2020-03-19 00:00:00"
+        },
+        {
+            "id":13647,
+            "post_date":"2020-03-19 00:00:00"
+        },
+        {
+            "id":13645,
+            "post_date":"2020-03-19 00:00:00"
+        }
+    ]
+}</code></pre>
+                </section>
+                <div class="alert alert-dark" role="alert" dir="ltr" style="text-align: left; border-top-right-radius: 0;border-top-left-radius: 0;">
+                    http://www.roooh10.com/?request=get_posts&count=3&fields=id,post_date&order_by=date&order=DESC&post__not_in=13651
+                </div>
+                <br>
+                <div class="font alert alert-primary" role="alert">
+                    نلاحظ أن هذا المثال الأخير يشبه المثال السابق له، لكن الأختلاف في post__not_in حيث تم تجاوز البوست رقم 13651 الذي تم تحديده بهذا المحدد
+                </div>
+                <br>
+                <section class="section-preview" dir="ltr" style="text-align: left;">
+                    <pre><code>{
+    "status":true,
+    "result":[
+        {
+            "id":13651,
+            "post_date":"2020-03-19 00:00:00",
+            "category":{
+                "category_id":13,
+                "name":"\u0635\u0648\u0631 \u0628\u062f\u0648\u064a\u0647 \u0631\u0645\u0632\u064a\u0647 \u0645\u062a\u0646\u0648\u0639\u0647",
+                "link":"http:\/\/roooh10.com\/category\/%d8%b5%d9%88%d8%b1-%d8%a8%d8%af%d9%88%d9%8a%d9%87-%d8%b1%d9%85%d8%b2%d9%8a%d9%87-%d9%85%d8%aa%d9%86%d9%88%d8%b9%d9%87\/"
+            }
+        },
+        {
+            "id":13649,
+            "post_date":"2020-03-19 00:00:00",
+            "category":{
+                "category_id":13,
+                "name":"\u0635\u0648\u0631 \u0628\u062f\u0648\u064a\u0647 \u0631\u0645\u0632\u064a\u0647 \u0645\u062a\u0646\u0648\u0639\u0647",
+                "link":"http:\/\/roooh10.com\/category\/%d8%b5%d9%88%d8%b1-%d8%a8%d8%af%d9%88%d9%8a%d9%87-%d8%b1%d9%85%d8%b2%d9%8a%d9%87-%d9%85%d8%aa%d9%86%d9%88%d8%b9%d9%87\/"
+            }
+        },
+        {
+            "id":13647,
+            "post_date":"2020-03-19 00:00:00",
+            "category":{
+                "category_id":13,
+                "name":"\u0635\u0648\u0631 \u0628\u062f\u0648\u064a\u0647 \u0631\u0645\u0632\u064a\u0647 \u0645\u062a\u0646\u0648\u0639\u0647",
+                "link":"http:\/\/roooh10.com\/category\/%d8%b5%d9%88%d8%b1-%d8%a8%d8%af%d9%88%d9%8a%d9%87-%d8%b1%d9%85%d8%b2%d9%8a%d9%87-%d9%85%d8%aa%d9%86%d9%88%d8%b9%d9%87\/"
+            }
+        }
+    ]
+}</code></pre>
+                </section>
+                <div class="alert alert-dark" role="alert" dir="ltr" style="text-align: left; border-top-right-radius: 0;border-top-left-radius: 0;">
+                    http://www.roooh10.com/?request=get_posts&count=3&fields=id,post_date,category&order_by=date&order=DESC
+                </div>
+            </section>
+            <br>
+            <div class="font alert alert-primary" role="alert">
+                في هذا المثال تم طلب (التصنيف) مع رقم البوست وتاريخه، في التنيف يتم عرض رقم التصنيف وإسمه ورابطه على الموقع
+            </div>
+
+            <br>
+            <br>
+            <br>
+
+            <section>
+                <div class="divider-new">
+                    <h2>&nbsp;get_post_by&nbsp;</h2>
+                </div>
+                <p class="h4 my-4">تعريف get_post_by</p>
+                <p>هذا الأمر للحصول على بوست واحد بطريقة سريعة بطرق غير ال ip</p>
+                <p class="h4 my-4">المحددات الخاصة به (عددها 3)</p>
+                <ul>
+                    <li><pre>by</pre></li>
+                    <li><pre>id</pre></li>
+                    <li><pre>fields</pre></li>
+                </ul>
+                <p>شرح هذه المحددات كما يلي:</p>
+                <div class="mt-1 card-header border-0 font-weight-bold d-flex justify-content-between">
+                    <p class="mr-4 mb-0"><code>by</code><span style="font-weight: 400;">&nbsp;&nbsp;جلب البوست بحسب : 
+                        <span style="padding-right:20px;"><br><span style="padding-right:20px;"><code>id</code> : رقم ال id مثل get_post
+                        <br><span style="padding-right:20px;"><code>last</code> جلب آخر بوست تم إنشاءه
+                        </span><br><span style="padding-right:20px;"><code>first</code> اول بوست
+                        </span><br><span style="padding-right:20px;"><code>modified</code> جلب آخر بوست تم تعديله
+                        </span></span>
+                        </span>
+                    </p>
+                </div>
+                <div class="mt-1 card-header border-0 font-weight-bold d-flex justify-content-between">
+                    <p class="mr-4 mb-0"><code>id</code><span style="font-weight: 400;">&nbsp;&nbsp; رقم البوست المطلوب في حال تم إختيار by=id </span></p>
+                </div>
+                <div class="mt-1 card-header border-0 font-weight-bold d-flex justify-content-between">
+                    <p class="mr-4 mb-0"><code>fields</code><span style="font-weight: 400;">&nbsp;&nbsp; الحقول المطلوبة لكل بوست </span></p>
+                </div>
+            </section>
+
+            <br>
+            <br>
+            <br>
+
+            <section>
+                <div class="divider-new">
+                    <h2>&nbsp;get_posts_by&nbsp;</h2>
+                </div>
+                <p class="h4 my-4">تعريف get_post_by</p>
+                <p>هذا الأمر للحصول على مجموعة بوستات بطريقة سريعة</p>
+                <p class="h4 my-4">المحددات الخاصة به (عددها 4)</p>
+                <ul>
+                    <li><pre>by</pre></li>
+                    <li><pre>id</pre></li>
+                    <li><pre>count</pre></li>
+                    <li><pre>fields</pre></li>
+                </ul>
+                <p>شرح هذه المحددات كما يلي:</p>
+                <div class="mt-1 card-header border-0 font-weight-bold d-flex justify-content-between">
+                    <p class="mr-4 mb-0"><code>by</code><span style="font-weight: 400;">&nbsp;&nbsp;جلب البوست بحسب : 
+                        <span style="padding-right:20px;"><br><span style="padding-right:20px;"><code>id</code> : رقم ال id مثل get_post وفي هذه الحالة يتم عرض نتيجة واحدة
+                        <br><span style="padding-right:20px;"><code>last</code> جلب آخر بوستات تم إنشاءها
+                        </span><br><span style="padding-right:20px;"><code>first</code> أول بوستات تم إنشاءها
+                        </span><br><span style="padding-right:20px;"><code>modified</code> آخر بوستات تم تعديلها
+                        </span></span>
+                        </span>
+                    </p>
+                </div>
+                <div class="mt-1 card-header border-0 font-weight-bold d-flex justify-content-between">
+                    <p class="mr-4 mb-0"><code>id</code><span style="font-weight: 400;">&nbsp;&nbsp; رقم البوست المطلوب في حال تم إختيار by=id </span></p>
+                </div>
+                <div class="mt-1 card-header border-0 font-weight-bold d-flex justify-content-between">
+                    <p class="mr-4 mb-0"><code>fields</code><span style="font-weight: 400;">&nbsp;&nbsp; الحقول المطلوبة لكل بوست </span></p>
+                </div>
+                <div class="mt-1 card-header border-0 font-weight-bold d-flex justify-content-between">
+                    <p class="mr-4 mb-0"><code>count</code><span style="font-weight: 400;">&nbsp;&nbsp; عدد النتائج المطلوبة </span></p>
+                </div>
+            </section>
+
+            <br>
+            <br>
+            <br>
+
+            <section>
+                <div class="divider-new">
+                    <h2>&nbsp;get_posts_count&nbsp;</h2>
+                </div>
+                <p class="h4 my-4">تعريف get_posts_count</p>
+                <p>هو أمر لمعرفة عدد البوستات حسب محددات معينة</p>
+                <p class="h4 my-4">المحددات الخاصة به (عددها 9)</p>
+                <ul>
+                    <li><pre>post__in</pre></li>
+                    <li><pre>post__not_in</pre></li>
+                    <li><pre>category__in</pre></li>
+                    <li><pre>category__not_in</pre></li>
+                    <li><pre>fields</pre></li>
+                    <li><pre>order_by</pre></li>
+                    <li><pre>order</pre></li>
+                    <li><pre>count</pre></li>
+                    <li><pre>page</pre></li>
+                </ul>
+                <p>شرح المحددات:</p>
+                <div class="font alert alert-primary" role="alert">
+                    شرح محددات هذا الأمر هو كما في محددات الأمر get_posts أعلاه تماما..
+                    <br> هذا الأمر يعرض عدد النتائج بدلا عن النتائج نفسها لمعرفة الإحصائيات وغيره
+                </div>
+            </section>
+
+            <br>
+            <br>
+            <br>
+
+            <section>
+                <div class="divider-new">
+                    <h2>&nbsp;get_pages_count&nbsp;</h2>
+                </div>
+                <p class="h4 my-4">تعريف get_posts_count</p>
+                <p>هذا الأمر لمعرفة عدد صفحات النتائج التي يتم الحصول عليها، كما تم ذكره في مثال المحدد page في الأمر get_post .. إذا كانت النتائج المحتملة 34 نتيجة وتم تحديد المحدد count=10 فسيتم عرض 10 نتائج فقط وستكون هنالك 4 صفحات للنتائج
+                    <br> الصفحة رقم 1 للنتائج من 1 إلى 10
+                    <br> الصفحة رقم 2 للنتائج من 11 إلى 21
+                    <br> الصفحة رقم 3 للنتائج من 21 إلى 30
+                    <br> الصفحة رقم 4 للنتائج من 31 إلى 34
+                    <br> إذا فعدد الصفحات 4 صفحات وهو النتيجة المطلوبة لهذا الأمر
+                </p>
+                <p class="h4 my-4">المحددات الخاصة به (عددها 9)</p>
+                <ul>
+                    <li><pre>post__in</pre></li>
+                    <li><pre>post__not_in</pre></li>
+                    <li><pre>category__in</pre></li>
+                    <li><pre>category__not_in</pre></li>
+                    <li><pre>fields</pre></li>
+                    <li><pre>order_by</pre></li>
+                    <li><pre>order</pre></li>
+                    <li><pre>count</pre></li>
+                    <li><pre>page</pre></li>
+                </ul>
+                <p>شرح المحددات:</p>
+                <div class="font alert alert-primary" role="alert">
+                    شرح محددات هذا الأمر هو كما في محددات الأمر get_posts أعلاه تماما..
+                    <br> هذا الأمر يعرض عدد (صفحات) النتائج بدلا عن النتائج نفسها أو عددها لمعرفة الإحصائيات وغيره
+                </div>
+            </section>
+
+            <br>
+            <br>
+            <br>
+
+            <section>
+                <div class="divider-new">
+                    <h2>&nbsp;get_category&nbsp;</h2>
+                </div>
+                <p class="h4 my-4">مقدمة عامة للتصنيفات:</p>
+                <p>لدى كل تصنيف (category) ثلاث قيم (حقول) هي:</p>
+                <p class="note note-primary" style="text-align: left;border: unset;line-height: 27px;" dir="ltr">
+                    <kbd>id</kbd> <kbd>name</kbd> <kbd>link</kbd>
+                </p>
+                <p>شرح هذه الحقول كما يلي:</p>
+                <div class="mt-1 card-header border-0 font-weight-bold d-flex justify-content-between">
+                    <p class="mr-4 mb-0"><code>id</code><span style="font-weight: 400;">&nbsp;&nbsp;  رقم التصنيف (هو الحقل الأساسي لإستدعاءه ولربطه بالبوستات)</span></p>
+                </div>
+                <div class="mt-1 card-header border-0 font-weight-bold d-flex justify-content-between">
+                    <p class="mr-4 mb-0"><code>name</code><span style="font-weight: 400;">&nbsp;&nbsp; إسم التصنيف، مثلا شعر صداقة ومدح، شعر كذا وكذا</span></p>
+                </div>
+                <div class="mt-1 card-header border-0 font-weight-bold d-flex justify-content-between">
+                    <p class="mr-4 mb-0"><code>link</code><span style="font-weight: 400;">&nbsp;&nbsp;  رابط التصنيف للموقع</span></p>
+                </div>
+                <br>
+                <hr>
+                <p class="h4 my-4">تعريف get_category</p>
+                <p>الأمر get_category هو أمر للحصول على تصنيف واحد مفرد بتحديد رقم id الخاص به</p>
+                <br>
+                <p class="h5 my-4">المحددات الخاصة بـ get_category (عددها 2) - (موضحة في الأمثلة)</p>
+                <ul>
+                    <li><pre>id</pre></li>
+                    <li><pre>fields</pre></li>
+                </ul>
+                <div class="mt-1 card-header border-0 font-weight-bold d-flex justify-content-between">
+                    <p class="mr-4 mb-0"><code>id</code><span style="font-weight: 400;">&nbsp;&nbsp; رقم التصنيف</span></p>
+                </div>
+                <div class="mt-1 card-header border-0 font-weight-bold d-flex justify-content-between">
+                    <p class="mr-4 mb-0"><code>fields</code><span style="font-weight: 400;">&nbsp;&nbsp;  الحقول المراد عرضها (رقم التصنيف، إسم التصنيف، الرابط الخاص به)، لعرض كل الحقول تكون القيمة كما يلي fields=all، تجاهل هذا المحدد يعتبر عرض كل الحقول بصورة إفتراضية</span></p>
+                </div>
+                <br>
+            </section>
+
+
+            <br>
+            <br>
+            <br>
+
+            <section>
+                <div class="divider-new">
+                    <h2>&nbsp;get_categories&nbsp;</h2>
+                </div>
+                <p class="h4 my-4">تعريف get_categories</p>
+                <p>الأمر get_categories هو أمر للحصول على كل أو مجموعة من التصنيفات بناءا على محددات معينة</p>
+                <br>
+                <p class="h5 my-4">المحددات الخاصة بـ get_categories (عددها 6) - (موضحة في الأمثلة)</p>
+                <ul>
+                    <li><pre>order_by</pre></li>
+                    <li><pre>order</pre></li>
+                    <li><pre>hide_empty</pre></li>
+                    <li><pre>include</pre></li>
+                    <li><pre>exclude</pre></li>
+                    <li><pre>fields</pre></li>
+                </ul>
+                <div class="mt-1 card-header border-0 font-weight-bold d-flex justify-content-between">
+                    <p class="mr-4 mb-0"><code>order_by</code><span style="font-weight: 400;">&nbsp;&nbsp; ترتيب النتائج بحسب: 
+                        <span style="padding-right:20px;"><br><span style="padding-right:20px;"><code>name</code> ترتيب بحسب إسم التصنيف
+                        <br><span style="padding-right:20px;"><code>count</code> ترتيب بحسب عدد البوستات داخل التصنيف
+                        </span><br><span style="padding-right:20px;"><code>slug</code> ترتيب بحسب الرابط
+                        </span><br><span style="padding-right:20px;"><code>term_id</code> ترتيب بحسب رقم التصنيف
+                        </span></span>
+                        </span>
+                    </p>
+                </div>
+                <div class="mt-1 card-header border-0 font-weight-bold d-flex justify-content-between">
+                    <p class="mr-4 mb-0"><code>order</code><span style="font-weight: 400;">&nbsp;&nbsp; ترتيب تصاعدي ام تنازلي DESC, ASC</span></p>
+                </div>
+                <div class="mt-1 card-header border-0 font-weight-bold d-flex justify-content-between">
+                    <p class="mr-4 mb-0"><code>hide_empty</code><span style="font-weight: 400;">&nbsp;&nbsp; إخفاء التصنيفات الفارغة أم لا، الإفتراضي نعم</span></p>
+                </div>
+                <div class="mt-1 card-header border-0 font-weight-bold d-flex justify-content-between">
+                    <p class="mr-4 mb-0"><code>include</code><span style="font-weight: 400;">&nbsp;&nbsp; عرض التصنيفات التي ضمن مجموعة محددة فقط، مثلا include=3,45,67,89 هنا النتيجة لا تغادر هذه المجموعة المختارة</span></p>
+                </div>
+                <div class="mt-1 card-header border-0 font-weight-bold d-flex justify-content-between">
+                    <p class="mr-4 mb-0"><code>exclude</code><span style="font-weight: 400;">&nbsp;&nbsp;  تجاهل النتائج التي تقع ضمن  هذه المجموعة</span></p>
+                </div>
+                <div class="mt-1 card-header border-0 font-weight-bold d-flex justify-content-between">
+                    <p class="mr-4 mb-0"><code>fields</code><span style="font-weight: 400;">&nbsp;&nbsp;  الحقول المراد عرضها (رقم التصنيف، إسم التصنيف، الرابط الخاص به)، لعرض كل الحقول تكون القيمة كما يلي fields=all، تجاهل هذا المحدد يعتبر عرض كل الحقول بصورة إفتراضية</span></p>
+                </div>
+                <br>
+            </section>
+
+
+
+            <br>
+            <br>
+            <br>
+
+            <section>
+                <div class="divider-new">
+                    <h2>&nbsp;delete_post&nbsp;</h2>
+                </div>
+                <p class="h4 my-4">تعريف delete_post</p>
+                <p>الأمر delete_post لحذف بوست معين من الموقع</p>
+                <br>
+                <p class="h5 my-4">المحددات الخاصة بـ delete_post (عددها 2)</p>
+                <ul>
+                    <li><pre>id</pre></li>
+                    <li><pre>force_delete</pre></li>
+                </ul>
+                <br>
+                <p>شرح المحددات كما يلي</p>
+                <br>
+                <div class="mt-1 card-header border-0 font-weight-bold d-flex justify-content-between">
+                    <p class="mr-4 mb-0"><code>id</code><span style="font-weight: 400;">&nbsp;&nbsp; رقم البوست المراد حذفه</span></p>
+                </div>
+                <div class="mt-1 card-header border-0 font-weight-bold d-flex justify-content-between">
+                    <p class="mr-4 mb-0"><code>force_delete</code><span style="font-weight: 400;">&nbsp;&nbsp; الحذف نهائيا أم لا (تجاوز سلة المهملات وحذف البوست بصورة نهائية)، لهذا المحدد قيميتين 0 و 1 الإفتراضي 0</span></p>
+                </div>
+                <br>
+            </section>
+
+
+
+            <br>
+            <br>
+            <br>
+
+            <section>
+                <div class="divider-new">
+                    <h2>&nbsp;update_post&nbsp;</h2>
+                </div>
+                <p class="h4 my-4">تعريف update_post</p>
+                <p>الأمر update_post للتعديل على البوستات</p>
+                <br>
+                <p class="h5 my-4">المحددات الخاصة بـ update_post (عددها 6)</p>
+                <ul>
+                    <li><pre>id</pre></li>
+                    <li><pre>title</pre></li>
+                    <li><pre>content</pre></li>
+                    <li><pre>categories</pre></li>
+                    <li><pre>append</pre></li>
+                    <li><pre>image_data</pre></li>
+                </ul>
+                <br>
+                <p>شرح المحددات كما يلي</p>
+                <br>
+                <div class="mt-1 card-header border-0 font-weight-bold d-flex justify-content-between">
+                    <p class="mr-4 mb-0"><code>id</code><span style="font-weight: 400;">&nbsp;&nbsp; رقم البوست المراد تحديثه</span></p>
+                </div>
+                <div class="mt-1 card-header border-0 font-weight-bold d-flex justify-content-between">
+                    <p class="mr-4 mb-0"><code>title</code><span style="font-weight: 400;">&nbsp;&nbsp; العنوان الجديد للبوست (تجاهل هذا المحدد في حال عدم الرغبة في تعديل العنوان)</span></p>
+                </div>
+                <div class="mt-1 card-header border-0 font-weight-bold d-flex justify-content-between">
+                    <p class="mr-4 mb-0"><code>content</code><span style="font-weight: 400;">&nbsp;&nbsp; المحتوى الجديد للبوست (تجاهل هذا المحدد في حال عدم الرغبة في تعديل المحتوى)</span></p>
+                </div>
+                <div class="mt-1 card-header border-0 font-weight-bold d-flex justify-content-between">
+                    <p class="mr-4 mb-0"><code>categories</code><span style="font-weight: 400;">&nbsp;&nbsp; أرقام التصنيف أو التصنيفات الجديدة المراد ضم البوست لها</span></p>
+                </div>
+                <div class="mt-1 card-header border-0 font-weight-bold d-flex justify-content-between">
+                    <p class="mr-4 mb-0"><code>append</code><span style="font-weight: 400;">&nbsp;&nbsp; إزالة التصنيفات السابقة وإضافة التصنيف الجديد، ام أضافة تصنيف جديد بدون حذف التصنيفات السابقة،
+                    أختر 0 للإضافة مع حذف التصنيفات السابقة او 1 للإبقاء بالتصنيفات السابقة، الإفتراضي 0
+                    </span></p>
+                </div>
+                <div class="mt-1 card-header border-0 font-weight-bold d-flex justify-content-between">
+                    <p class="mr-4 mb-0"><code>image_data</code><span style="font-weight: 400;">&nbsp;&nbsp; هذا المحدد يتم إرساله عن طريق (POST) وهو عبارة عن صورة تم تحويلها لنص بنظام 64، base64 image،
+                    عند إرسال صورة بهذا المحدد يتم تغير الصورة الحالية للصورة الجديدة للبوست المطلوب
+                    </span></p>
+                </div>
+                <br>
+            </section>
+
+            <br>
+            <br>
+            <br>
+
+            <section>
+                <div class="divider-new">
+                    <h2>&nbsp;insert_post&nbsp;</h2>
+                </div>
+                <p class="h4 my-4">تعريف insert_post</p>
+                <p>الأمر insert_post لإضافة بوست جديد، تكون النتيجةعبارة عن رقم البوست الجديد في حالة نجاح إضافة البوست</p>
+                <br>
+                <p class="h5 my-4">المحددات الخاصة بـ insert_post (عددها 5)</p>
+                <ul>
+                    <li><pre>title</pre></li>
+                    <li><pre>content</pre></li>
+                    <li><pre>status</pre></li>
+                    <li><pre>categories</pre></li>
+                    <li><pre>image_data</pre></li>
+                </ul>
+                <br>
+                <p>شرح المحددات كما يلي</p>
+                <br>
+                <div class="mt-1 card-header border-0 font-weight-bold d-flex justify-content-between">
+                    <p class="mr-4 mb-0"><code>title</code><span style="font-weight: 400;">&nbsp;&nbsp; عنوان البوست، (الرابط يتم توليده من العنوان)</span></p>
+                </div>
+                <div class="mt-1 card-header border-0 font-weight-bold d-flex justify-content-between">
+                    <p class="mr-4 mb-0"><code>content</code><span style="font-weight: 400;">&nbsp;&nbsp; محتوى البوست (القصيدة)</span></p>
+                </div>
+                <div class="mt-1 card-header border-0 font-weight-bold d-flex justify-content-between">
+                    <p class="mr-4 mb-0"><code>status</code><span style="font-weight: 400;">&nbsp;&nbsp; حالة البوست (publish, pending) في حال إختيار publish يتم نشر البوست فورا في الموقع، في حال pending يتم وضعه كقيد المراجعة للنشر، يتم نشره من لوحة التحكم في حال الموافقة عليه</span></p>
+                </div>
+                <div class="mt-1 card-header border-0 font-weight-bold d-flex justify-content-between">
+                    <p class="mr-4 mb-0"><code>categories</code><span style="font-weight: 400;">&nbsp;&nbsp; التصنيف او التصنيفات المراد ضم البوست لها، مثال: categories=3 او مثال آخر، categories=2,34,66 يتم الفصل بينهم بفواصل كما في المثال 
+                    </span></p>
+                </div>
+                <div class="mt-1 card-header border-0 font-weight-bold d-flex justify-content-between">
+                    <p class="mr-4 mb-0"><code>image_data</code><span style="font-weight: 400;">&nbsp;&nbsp; هذا المحدد يتم إرساله عن طريق (POST) وهو عبارة عن صورة تم تحويلها لنص بنظام 64، base64 image،
+                    وهو الصورة التي يتم عرضها في مقدمة البوست في الموقع
+                    </span></p>
+                </div>
+                <br>
+                <div class="font alert alert-primary" role="alert">
+                    تكون نتيجة هذا الأمر عبارة عن رقم البوست الجديد المضاف
+                </div>
+                <br>
+            </section>
+
+            <br>
+            <br>
+            <br>
+            <br>
+
+            <section>
+                <div class="divider-new">
+                    <h2>&nbsp;get_updates&nbsp;</h2>
+                </div>
+                <div class="font alert alert-primary" role="alert">
+                    هذا المحدد الآخير، يعتمد عليه معرفة آخر التحديثات ، البوستات المضافة والمحذوفة والمعدلة مؤخرا، وبرقم لكل تعديل لتسهل عملية التعرف عليها من جهات خارجية كالتطبيق ومن ثم تعديها أو إضافتها او حضفها،، سيتم شرحها لاحقا بإذن الله
+                </div>
+            </section>
+
+
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+        </div>
+    </div>
+</body>
+
+</html>
