@@ -14,6 +14,5 @@ require_once(CAPI_DIR . '/classes/rooh.php');
 require_once(CAPI_DIR . '/functions.php');
 
 add_action('init', function(){
-    if(!isset($_GET['a']))return;
-    echo 'c';exit;
+    rooh::start();
 });
