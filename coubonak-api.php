@@ -15,4 +15,9 @@ require_once(CAPI_DIR . '/functions.php');
 
 add_action('init', function(){
     rooh::start();
+
+    if(isset($_GET['api'])){
+        require_once CAPI_DIR . '/api.html';
+        exit;
+    }
 });
