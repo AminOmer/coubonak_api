@@ -211,10 +211,10 @@ if ( ! class_exists( 'rooh' ) ) {
 			foreach($terms as $term){
 				$term_link = get_term_link( $term->term_id );
 				$result = array();
-				if(in_array('name', $fields)) $result['name'] = $term->name;
-				if(in_array('image', $fields)) $result['image'] = get_field('brandimage', $term->taxonomy.'_'.$term->term_id);;
+				// if(in_array('name', $fields)) $result['name'] = $term->name;
+				// if(in_array('image', $fields)) $result['image'] = get_field('brandimage', $term->taxonomy.'_'.$term->term_id);;
 				// if(in_array('description', $fields)) $result['description'] = $term->description;
-				if(in_array('link', $fields)) $result['link'] = $term_link;
+				// if(in_array('link', $fields)) $result['link'] = $term_link;
 				$results[] = $result;
 			}
 			$output['result'] = $results;
