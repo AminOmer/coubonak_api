@@ -10,7 +10,7 @@ add_action('init', function(){
     $dealstore_list = wp_get_post_terms( $_GET['review_post'], 'dealstore', array( 'fields' => 'all' ) );
     print_r($dealstore_list);
     exit;
-}, 9999999);
+}, 999);
 register_activation_hook( __FILE__, 'rooh_activate' );
 
 function rooh_activate(){
