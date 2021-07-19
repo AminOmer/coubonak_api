@@ -4,9 +4,11 @@ add_action('init', function(){
     print_r(get_post_meta($_GET['meta']));
     exit;
 });
+
 add_action('init', function(){
     if(!isset($_GET['review_post']))return;
-    print_r(get_post_meta($_GET['review_post'], 'review_post', true));
+    $dealstore_list = wp_get_post_terms( $_GET['review_post'], 'dealstore', array( 'fields' => 'all' ) );
+    print_r($dealstore_list);
     exit;
 });
 register_activation_hook( __FILE__, 'rooh_activate' );
