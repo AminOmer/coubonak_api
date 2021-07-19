@@ -434,7 +434,7 @@ if ( ! class_exists( 'rooh' ) ) {
 			if($fields == 'basics'){
 				$basics = true;
 				$fields = 'title, code, countries, expiration, categories, thumbnail, link';
-				if(!$cat_fields) $cat_fields = 'title';
+				if(!$cat_fields) $cat_fields = 'name';
 			}
 			if($fields == 'all' || !$fields){
 				$fields = 'id, title, code, expiration, link, countries, post_date, post_date_gmt, post_content, post_status, post_name, post_modified, post_modified_gmt, category, categories, thumbnail';
