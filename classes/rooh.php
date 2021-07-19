@@ -218,7 +218,7 @@ if ( ! class_exists( 'rooh' ) ) {
 				$results[] = $result;
 			}
 			$output['result'] = $results;
-			return $output;
+			return $results;
 		}
 		
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -459,7 +459,7 @@ if ( ! class_exists( 'rooh' ) ) {
 				$posts[] = $post['result'];
 			}
 			$output['result'] = $posts;
-			return $output;
+			return $posts;
 
 		}
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
