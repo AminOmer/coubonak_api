@@ -52,6 +52,9 @@ if ( ! class_exists( 'rooh' ) ) {
 				header("Content-disposition: attachment; filename=\"" . basename($file_url) . "\""); 
 				readfile($file_url);
 			}else{
+				if(isset($output['result']) && isset($output['status']) && $output['status'] == true){
+					$output = $output['result'];
+				}
 				echo json_encode($output);
 			}
 			
@@ -218,7 +221,7 @@ if ( ! class_exists( 'rooh' ) ) {
 				$results[] = $result;
 			}
 			$output['result'] = $results;
-			return $results;
+			return $output;
 		}
 		
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -459,7 +462,7 @@ if ( ! class_exists( 'rooh' ) ) {
 				$posts[] = $post['result'];
 			}
 			$output['result'] = $posts;
-			return $posts;
+			return $output;
 
 		}
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
