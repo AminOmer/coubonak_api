@@ -433,11 +433,11 @@ if ( ! class_exists( 'rooh' ) ) {
 			$basics = false;
 			if($fields == 'basics'){
 				$basics = true;
-				$fields = 'title, code, countries, expiration, categories, thumbnail, link';
+				$fields = 'title, code, countries, expiration, dealstore, thumbnail, link';
 				if(!$cat_fields) $cat_fields = 'name';
 			}
 			if($fields == 'all' || !$fields){
-				$fields = 'id, title, code, expiration, link, countries, post_date, post_date_gmt, post_content, post_status, post_name, post_modified, post_modified_gmt, category, categories, thumbnail';
+				$fields = 'id, title, code, expiration, link, countries, post_date, post_date_gmt, post_content, post_status, post_name, post_modified, post_modified_gmt, category, dealstore, categories, thumbnail';
 			}
 			if($cat_fields == 'all' || !$cat_fields){
 				$cat_fields = 'id, name, link';
@@ -483,6 +483,14 @@ if ( ! class_exists( 'rooh' ) ) {
 					if(!$k)$post_category = $cats_arr;
 				}
 			}
+
+			$dealstore = '';
+			$dealstore_list = wp_get_post_terms( $post->ID, 'dealstore', array( 'fields' => 'all' ) );
+			if(is_array($dealstore_list))
+			foreach($dealstore_list as $dealstore_list_item){
+				$dealstore = $dealstore_list_item->name;
+				break;
+			}
 			$review_post = get_post_meta($post->ID, 'review_post', true);
 			$code		= get_post_meta($post->ID, 'rehub_offer_product_coupon', true);
 			$countries	= get_post_meta($post->ID, '_notice_custom', true);
@@ -499,6 +507,7 @@ if ( ! class_exists( 'rooh' ) ) {
 			if(in_array('code', $fields)) $output['result']['code'] = $code;
 			if(in_array('countries', $fields)) $output['result']['countries'] = $countries;
 			if(in_array('expiration', $fields))	$output['result']['expiration'] = $expiration;
+			if(in_array('dealstore', $fields))	$output['result']['cat'] = $dealstore;
 			if(in_array('link', $fields)) $output['result']['link'] = $link;
 			if(in_array('post_date', $fields))$output['result']['post_date'] = $post->post_date;
 			if(in_array('post_date_gmt', $fields))$output['result']['post_date_gmt'] = $post->post_date_gmt;
