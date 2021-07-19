@@ -201,7 +201,7 @@ if ( ! class_exists( 'rooh' ) ) {
 			));
 			// print_r($terms);exit;
 			$output = array();
-			if(!$terms || !is_array($terms) || empty($terms)){
+			if(1 || !$terms || !is_array($terms) || empty($terms)){
 				$output['status'] = false;
 				$output['result'] = false;
 				return $output;
