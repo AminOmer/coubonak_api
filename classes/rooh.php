@@ -486,6 +486,8 @@ if ( ! class_exists( 'rooh' ) ) {
 
 			$dealstore = '';
 			$dealstore_list = wp_get_post_terms( $post->ID, 'dealstore', array( 'fields' => 'all' ) );
+			print_r($dealstore_list);
+			exit;
 			if(is_array($dealstore_list))
 			foreach($dealstore_list as $dealstore_list_item){
 				$dealstore = $dealstore_list_item->name;
