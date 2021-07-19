@@ -482,16 +482,23 @@ if ( ! class_exists( 'rooh' ) ) {
 					if(!$k)$post_category = $cats_arr;
 				}
 			}
-			$code		= '';
-			$countries	= '';
-			$expiration = '';
-			$link 		= '';
+			$review_post = get_post_meta($post->ID, 'review_post', true);
+			$code		= get_post_meta($post->ID, 'rehub_offer_product_coupon', true);
+			$countries	= get_post_meta($post->ID, '_notice_custom', true);
+			$expiration = (is_array($review_post) && isset($review_post[0]['review_post_pros_text']))?$review_post[0]['review_post_pros_text']:'';
+			$link 		= get_post_meta($post->ID, 'rehub_offer_product_url', true);
+
+			if(!$code)$code = '';
+			if(!$countries)$countries = '';
+			if(!$expiration)$expiration = '';
+			if(!$link)$link = '';
+			
 			if(in_array('id', $fields))	$output['result']['id'] = $post->ID;
+			if(in_array('title', $fields))$output['result']['title'] = $post->post_title;
 			if(in_array('code', $fields)) $output['result']['code'] = $code;
 			if(in_array('countries', $fields)) $output['result']['countries'] = $countries;
 			if(in_array('expiration', $fields))	$output['result']['expiration'] = $expiration;
 			if(in_array('link', $fields)) $output['result']['link'] = $link;
-			if(in_array('title', $fields))$output['result']['title'] = $post->post_title;
 			if(in_array('post_date', $fields))$output['result']['post_date'] = $post->post_date;
 			if(in_array('post_date_gmt', $fields))$output['result']['post_date_gmt'] = $post->post_date_gmt;
 			if(in_array('post_content', $fields))$output['result']['post_content'] = $post->post_content;
