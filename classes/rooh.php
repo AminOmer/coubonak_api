@@ -478,6 +478,7 @@ if ( ! class_exists( 'rooh' ) ) {
 					if(in_array('id', $cat_fields))$cats_arr['id'] = $cat->term_id;
 					if(in_array('name', $cat_fields))$cats_arr['name'] = $cat->name;
 					if(in_array('link', $cat_fields))$cats_arr['link'] = $cat->cat_link;
+					if(count($cats_arr) == 1)$cats_arr = $cats_arr[array_values($cats_arr)[0]];
 					if(!empty($cats_arr))$post_categories[] = $cats_arr;
 					if(!$k)$post_category = $cats_arr;
 				}
