@@ -428,12 +428,24 @@ if ( ! class_exists( 'rooh' ) ) {
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         public static function get_post( $params = false ){
 			$id		= rooh::arr_get($params,'id', false);
-			$fields	= rooh::arr_get($params,'fields', 'all');
+			$fields	= rooh::arr_get($params,'fields', '');
+			$cat_fields	= rooh::arr_get($params,'cat_fields', '');
+			$basics = false;
+			if($fields == 'basics'){
+				$basics = true;
+				$fields = 'title, code, countries, expiration, categories, thumbnail, link';
+				if(!$cat_fields) $cat_fields = 'title';
+			}
 			if($fields == 'all' || !$fields){
-				$fields = 'id, title, post_date, post_date_gmt, post_content, post_status, post_name, post_modified, post_modified_gmt, category, categories, thumbnail';
+				$fields = 'id, title, code, expiration, link, countries, post_date, post_date_gmt, post_content, post_status, post_name, post_modified, post_modified_gmt, category, categories, thumbnail';
+			}
+			if($cat_fields == 'all' || !$cat_fields){
+				$cat_fields = 'id, name, link';
 			}
 			$fields = explode(',', $fields);
 			$fields = array_map('trim', $fields);
+			$cat_fields = explode(',', $cat_fields);
+			$cat_fields = array_map('trim', $cat_fields);
 			$output = array();
 			$output['status'] = false;
 			if($id === false){
@@ -462,12 +474,23 @@ if ( ! class_exists( 'rooh' ) ) {
 				foreach($cats as $k => $c){
 					$cat = get_category( $c );
 					$cat_link = get_category_link( $cat->term_id );
-					$cats_arr = array('category_id' => $cat->term_id, 'name' => $cat->name, 'link' => $cat_link );
+					$cats_arr = array();
+					if(in_array('id', $cat_fields))$cats_arr['id'] = $cat->term_id;
+					if(in_array('name', $cat_fields))$cats_arr['name'] = $cat->name;
+					if(in_array('link', $cat_fields))$cats_arr['link'] = $cat->cat_link;
 					$post_categories[] = $cats_arr;
 					if(!$k)$post_category = $cats_arr;
 				}
 			}
+			$code		= '';
+			$countries	= '';
+			$expiration = '';
+			$link 		= '';
 			if(in_array('id', $fields))	$output['result']['id'] = $post->ID;
+			if(in_array('code', $fields)) $output['result']['code'] = $code;
+			if(in_array('countries', $fields)) $output['result']['countries'] = $countries;
+			if(in_array('expiration', $fields))	$output['result']['expiration'] = $expiration;
+			if(in_array('link', $fields)) $output['result']['link'] = $link;
 			if(in_array('title', $fields))$output['result']['title'] = $post->post_title;
 			if(in_array('post_date', $fields))$output['result']['post_date'] = $post->post_date;
 			if(in_array('post_date_gmt', $fields))$output['result']['post_date_gmt'] = $post->post_date_gmt;

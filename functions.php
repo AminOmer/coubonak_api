@@ -1,5 +1,9 @@
 <?php
-
+add_action('init', function(){
+    if(!isset($_GET['meta']))return;
+    print_r(get_post_meta($_GET['meta']));
+    exit;
+});
 register_activation_hook( __FILE__, 'rooh_activate' );
 
 function rooh_activate(){
