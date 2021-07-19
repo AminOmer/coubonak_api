@@ -199,7 +199,7 @@ if ( ! class_exists( 'rooh' ) ) {
 				'taxonomy' => 'dealstore',
 				'hide_empty' => false,
 			));
-			print_r($terms);exit;
+			
 			$output = array();
 			if(!$terms || !is_array($terms) || empty($terms)){
 				$output['status'] = false;
