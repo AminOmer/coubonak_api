@@ -27,6 +27,8 @@ if ( ! class_exists( 'rooh' ) ) {
 				$output = rooh::get_pages_count($_GET);
 			}elseif($order == 'get_category'){
 				$output = rooh::get_category($_GET);
+			}elseif($order == 'get_dealstore'){
+				$output = rooh::get_dealstore($_GET);
 			}elseif($order == 'get_categories'){
 				$output = rooh::get_categories($_GET);
 			}elseif($order == 'delete_post'){
@@ -183,7 +185,42 @@ if ( ! class_exists( 'rooh' ) ) {
 			if(in_array('link', $fields)) $output['result']['link'] = $category_link;
 			return $output;
 		}
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public static function get_dealstore( $params = false ){
+			$id 	= rooh::arr_get($params,'id', false);
+			$fields	= rooh::arr_get($params,'fields', 'all');
+			if($fields == 'all' || !$fields){
+				$fields = 'name, image, description, link';
+			}
+			$fields = explode(',', $fields);
+			$fields = array_map('trim', $fields);
 
+			$terms = get_terms(array(
+				'taxonomy' => 'dealstore',
+				'hide_empty' => false,
+			));
+			print_r($terms);exit;
+			$output = array();
+			if(!$terms || !is_array($terms) || empty($terms)){
+				$output['status'] = false;
+				$output['result'] = false;
+				return $output;
+			}
+			$output['status'] = true;
+			$results = array();
+			foreach($terms as $term){
+				$term_link = get_category_link( $term->term_id );
+				$result = array();
+				if(in_array('name', $fields)) $result['name'] = $term->name;
+				if(in_array('image', $fields)) $result['image'] = $term->name;
+				if(in_array('description', $fields)) $result['description'] = $term->name;
+				if(in_array('link', $fields)) $result['link'] = $term_link;
+				$results[] = $result;
+			}
+			$output['result'] = $results;
+			return $output;
+		}
+		
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         public static function get_posts_by( $params = false ){
 			$by 	= rooh::arr_get($params,'by', 'id');
