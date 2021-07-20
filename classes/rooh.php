@@ -215,9 +215,9 @@ if ( ! class_exists( 'rooh' ) ) {
 				$term_link = get_term_link( $term->term_id );
 				$result = array();
 				if(in_array('name', $fields)) $result['name'] = $term->name;
-				if(in_array('image', $fields)) $result['image'] = get_term_meta($term->term_id, 'brandimage');
+				if(in_array('image', $fields)) $result['image'] = get_term_meta($term->term_id, 'brandimage', true);
 				if(in_array('description', $fields)) $result['description'] = $term->description;
-				if(in_array('link', $fields)) $result['link'] = $term_link;
+				if(in_array('link', $fields)) $result['link'] = get_term_meta($term->term_id, 'brand_url', true);
 				$results[] = $result;
 			}
 			$output['result'] = $results;
