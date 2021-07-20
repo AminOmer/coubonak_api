@@ -19,6 +19,5 @@ add_action('init', function(){
     if(isset($_GET['api'])){
         require_once CAPI_DIR . '/api.html';
         exit;
-
     }
 }, 999);
