@@ -510,6 +510,7 @@ if ( ! class_exists( 'rooh' ) ) {
 			$url = get_permalink($post->ID);
 			$post_category = array();
 			$post_categories = array();
+			$cats_names = array();
 			if($cats){
 				foreach($cats as $k => $c){
 					$cat = get_category( $c );
@@ -521,6 +522,7 @@ if ( ! class_exists( 'rooh' ) ) {
 					if(count($cats_arr) == 1)$cats_arr = $cats_arr[array_key_first($cats_arr)];
 					if(!empty($cats_arr))$post_categories[] = $cats_arr;
 					if(!$k)$post_category = $cats_arr;
+					$cats_names[] = $cat->name;
 				}
 			}
 
@@ -533,7 +535,7 @@ if ( ! class_exists( 'rooh' ) ) {
 			}
 			$review_post = get_post_meta($post->ID, 'review_post', true);
 			$code		= get_post_meta($post->ID, 'rehub_offer_product_coupon', true);
-			$countries	= get_post_meta($post->ID, '_notice_custom', true);
+			$countries	= $cats_names; //get_post_meta($post->ID, '_notice_custom', true);
 			$expiration = (is_array($review_post) && isset($review_post[0]['review_post_pros_text']))?$review_post[0]['review_post_pros_text']:'';
 			$link 		= get_post_meta($post->ID, 'rehub_offer_product_url', true);
 
