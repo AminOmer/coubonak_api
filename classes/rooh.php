@@ -12,39 +12,39 @@ if ( ! class_exists( 'rooh' ) ) {
 			if(!isset($_GET['request']))return;
 			if(isset($_GET['api'])){require_once CAPI_DIR . '/api.html';exit;}
 			if(!isset($_GET['key']) || $_GET['key'] != $key){echo 'error !!'; exit;}
-			
+
 			header("Content-Type: application/json;charset=utf-8");
 			$order = rooh::arr_get($_GET,'request', '');
 			if($order == 'get_post'){
 				$output = rooh::get_post($_GET);
-			}elseif($order == 'get_post_by'){
-				$output = rooh::get_post_by($_GET);
-			}elseif($order == 'get_posts_by'){
-				$output = rooh::get_posts_by($_GET);
-			}elseif($order == 'get_posts'){
-				$output = rooh::get_posts($_GET);
-			}elseif($order == 'get_posts_count'){
-				$output = rooh::get_posts_count($_GET);
-			}elseif($order == 'get_pages_count'){
-				$output = rooh::get_pages_count($_GET);
-			}elseif($order == 'get_category'){
-				$output = rooh::get_category($_GET);
+			// }elseif($order == 'get_post_by'){
+			// 	$output = rooh::get_post_by($_GET);
+			// }elseif($order == 'get_posts_by'){
+			// 	$output = rooh::get_posts_by($_GET);
+			// }elseif($order == 'get_posts'){
+			// 	$output = rooh::get_posts($_GET);
+			// }elseif($order == 'get_posts_count'){
+			// 	$output = rooh::get_posts_count($_GET);
+			// }elseif($order == 'get_pages_count'){
+			// 	$output = rooh::get_pages_count($_GET);
+			// }elseif($order == 'get_category'){
+			// 	$output = rooh::get_category($_GET);
 			}elseif($order == 'get_dealstore'){
 				$output = rooh::get_dealstore($_GET);
-			}elseif($order == 'get_categories'){
-				$output = rooh::get_categories($_GET);
-			}elseif($order == 'delete_post'){
-				$output = rooh::delete_post($_GET);
-			}elseif($order == 'update_post'){
-				$output = rooh::update_post($_GET);
-			}elseif($order == 'insert_post'){
-				$output = rooh::insert_post($_GET);
-			}elseif($order == 'get_updates'){
-				$output = rooh::get_updates($_GET);
+			// }elseif($order == 'get_categories'){
+			// 	$output = rooh::get_categories($_GET);
+			// }elseif($order == 'delete_post'){
+			// 	$output = rooh::delete_post($_GET);
+			// }elseif($order == 'update_post'){
+			// 	$output = rooh::update_post($_GET);
+			// }elseif($order == 'insert_post'){
+			// 	$output = rooh::insert_post($_GET);
+			// }elseif($order == 'get_updates'){
+			// 	$output = rooh::get_updates($_GET);
 			}
 
 			if(isset($_GET['as_file'])){
-				$fp = fopen(MAIN_DIR . '/data.json', 'w');
+				$fp = fopen(CAPI_DIR . '/data.json', 'w');
 				fwrite($fp, json_encode($output));
 				fclose($fp);
 
@@ -671,7 +671,7 @@ if ( ! class_exists( 'rooh' ) ) {
 			if(isset($_POST['image_data'])){
 				if(!$name)$name= 'صورة ' . rand(100000, 9999999);
 				if(!$path){
-					$path = MAIN_DIR . '/temp';
+					$path = CAPI_DIR . '/temp';
 					$path_url = home_url() . '/temp';
 				}
 				$path = rtrim(rtrim($path, '/'),'\\');
