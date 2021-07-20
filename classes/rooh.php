@@ -17,8 +17,19 @@ if ( ! class_exists( 'rooh' ) ) {
 			$order = rooh::arr_get($_GET,'request', '');
 			if($order == 'get_post'){
 				$output = rooh::get_post($_GET);
+			// }elseif($order == 'get_post_by'){
+			// 	$output = rooh::get_post_by($_GET);
+			// }elseif($order == 'get_posts_by'){
+			// 	$output = rooh::get_posts_by($_GET);
+			}elseif($order == 'get_posts'){
+				$output = rooh::get_posts($_GET);
+			// }elseif($order == 'get_posts_count'){
+			// 	$output = rooh::get_posts_count($_GET);
+			// }elseif($order == 'get_pages_count'){
+			// 	$output = rooh::get_pages_count($_GET);
+			// }elseif($order == 'get_category'){
+			// 	$output = rooh::get_category($_GET);
 			}elseif($order == 'get_dealstore'){
-				$output = rooh::get_dealstore($_GET);
 			}
 
 			if(isset($_GET['as_file'])){
