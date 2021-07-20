@@ -17,18 +17,14 @@ if ( ! class_exists( 'rooh' ) ) {
 			$order = rooh::arr_get($_GET,'request', '');
 			if($order == 'get_post'){
 				$output = rooh::get_post($_GET);
-			// }elseif($order == 'get_post_by'){
-			// 	$output = rooh::get_post_by($_GET);
-			// }elseif($order == 'get_posts_by'){
-			// 	$output = rooh::get_posts_by($_GET);
 			}elseif($order == 'get_posts'){
 				$output = rooh::get_posts($_GET);
-			// }elseif($order == 'get_posts_count'){
-			// 	$output = rooh::get_posts_count($_GET);
-			// }elseif($order == 'get_pages_count'){
-			// 	$output = rooh::get_pages_count($_GET);
-			// }elseif($order == 'get_category'){
-			// 	$output = rooh::get_category($_GET);
+			}elseif($order == 'get_posts_count'){
+				$output = rooh::get_posts_count($_GET);
+			}elseif($order == 'get_pages_count'){
+				$output = rooh::get_pages_count($_GET);
+			}elseif($order == 'get_category'){
+				$output = rooh::get_category($_GET);
 			}elseif($order == 'get_dealstore'){
 				$output = rooh::get_dealstore($_GET);
 			}
@@ -51,70 +47,6 @@ if ( ! class_exists( 'rooh' ) ) {
 			}
 			
 			exit;
-		}
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        public static function insert_post( $params = false ){
-			$title		= rooh::arr_get($params,'title', false);
-			$content	= rooh::arr_get($params,'content', false);
-			$status		= rooh::arr_get($params,'status', 'publish');
-			$categories	= rooh::arr_get($params,'categories', false);
-			$output = array();
-			$post = array();
-			$post['post_title'] 	= $title;
-			$post['post_content'] 	= $content;
-			$post['post_status'] 	= $post_status;
-			$id = wp_insert_post($post);
-			if(!$id){
-				$output['status'] = false;
-				$output['result'] = 'error to insert post';
-				return $output;
-			}
-			if($categories){
-				$categories = explode(',', $categories);
-				$categories = array_map('trim', $categories);
-				wp_set_post_categories($id, $categories, $append);
-			}
-			if($image = rooh::getImagePost()){
-				rooh::setImage($id, $image['image_url']);
-			}
-			$result['id'] = $id;
-			$output['status'] = true;
-			$output['result'] = $result;
-			return $output;
-		}
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        public static function update_post( $params = false ){
-			$id			= rooh::arr_get($params,'id', false);
-			$title		= rooh::arr_get($params,'title', false);
-			$content	= rooh::arr_get($params,'content', false);
-			$categories	= rooh::arr_get($params,'categories', false);
-			$append		= rooh::arr_get($params,'append', false);
-			
-			if($image = rooh::getImagePost()){
-				rooh::setImage($id, $image['image_url']);
-			}
-			if($categories){
-				$categories = explode(',', $categories);
-				$categories = array_map('trim', $categories);
-				wp_set_post_categories($id, $categories, $append);
-			}
-			$args = array();
-			$args['ID']	= $id;
-			if($title)$args['post_title'] = $title;
-			if($content)$args['post_content'] = $content;
-			$result = wp_update_post($args);
-			$output['status'] = true;
-			$output['result'] = $result;
-			return $output;
-		}
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        public static function delete_post( $params = false ){
-			$id				= rooh::arr_get($params,'id', false);
-			$force_delete	= rooh::arr_get($params,'force_delete', false);
-			$result = wp_delete_post($id, $force_delete);
-			$output['status'] = true;
-			$output['result'] = $result;
-			return $output;
 		}
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         public static function get_categories( $params = false ){
@@ -216,89 +148,6 @@ if ( ! class_exists( 'rooh' ) ) {
 			return $output;
 		}
 		
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        public static function get_posts_by( $params = false ){
-			$by 	= rooh::arr_get($params,'by', 'id');
-			$id 	= rooh::arr_get($params,'id', false);
-			$fields	= rooh::arr_get($params,'fields', 'all');
-			$count	= rooh::arr_get($params,'count', 1);
-
-			if($by == 'id'){
-				return rooh::get_post(array('id' => $id, 'fields' => $fields));
-			}elseif($by == 'last'){
-				$args = array(
-					'orderby' 	=> 'publish_date',
-					'order'		=> 'DESC',
-					'posts_per_page' => $count
-				);
-				$latest_cpt = get_posts($args);
-				$id = $latest_cpt[0]->ID;
-				return rooh::get_post(array('id' => $id, 'fields' => $fields));
-			}elseif($by == 'first'){
-				$args = array(
-					'orderby' 	=> 'publish_date',
-					'order'		=> 'ASC',
-					'posts_per_page' => $count
-				);
-				$latest_cpt = get_posts($args);
-				$id = $latest_cpt[0]->ID;
-				return rooh::get_post(array('id' => $id, 'fields' => $fields));
-			}elseif($by == 'modified'){
-				$args = array(
-					'orderby' => 'modified',
-					'ignore_sticky_posts' => '1',
-					'numberposts' => $count
-				);
-				$latest_cpt = get_posts($args);
-				$id = $latest_cpt[0]->ID;
-				return rooh::get_post(array('id' => $id, 'fields' => $fields));
-			}else{
-				$latest_cpt = get_posts("numberposts=$count");
-				$id = $latest_cpt[0]->ID;
-				return rooh::get_post(array('id' => $id, 'fields' => $fields));
-			}
-		}
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        public static function get_post_by( $params = false ){
-			$by 	= rooh::arr_get($params,'by', 'id');
-			$id 	= rooh::arr_get($params,'id', false);
-			$fields	= rooh::arr_get($params,'fields', 'all');
-
-			if($by == 'id'){
-				return rooh::get_post(array('id' => $id, 'fields' => $fields));
-			}elseif($by == 'last'){
-				$args = array(
-					'orderby' 	=> 'publish_date',
-					'order'		=> 'DESC',
-					'posts_per_page' => 1
-				);
-				$latest_cpt = get_posts($args);
-				$id = $latest_cpt[0]->ID;
-				return rooh::get_post(array('id' => $id, 'fields' => $fields));
-			}elseif($by == 'first'){
-				$args = array(
-					'orderby' 	=> 'publish_date',
-					'order'		=> 'ASC',
-					'posts_per_page' => 1
-				);
-				$latest_cpt = get_posts($args);
-				$id = $latest_cpt[0]->ID;
-				return rooh::get_post(array('id' => $id, 'fields' => $fields));
-			}elseif($by == 'modified'){
-				$args = array(
-					'orderby' => 'modified',
-					'ignore_sticky_posts' => '1',
-					'numberposts' => 1
-				);
-				$latest_cpt = get_posts($args);
-				$id = $latest_cpt[0]->ID;
-				return rooh::get_post(array('id' => $id, 'fields' => $fields));
-			}else{
-				$latest_cpt = get_posts("numberposts=1");
-				$id = $latest_cpt[0]->ID;
-				return rooh::get_post(array('id' => $id, 'fields' => $fields));
-			}
-		}
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         public static function get_pages_count( $params = false ){
 			$post__in			= rooh::arr_get($params,'post__in', false);
@@ -655,74 +504,6 @@ if ( ! class_exists( 'rooh' ) ) {
 			if(!is_array($array))return $equals;
 			if(!isset($array[$item]))return $equals;
 			return $array[$item];   
-		}
-		//////////////////////////////////////////////////////////////////////////////////////////////
-		public static function getImagePost($name = false, $path = false){
-			if(isset($_POST['image_data'])){
-				if(!$name)$name= 'صورة ' . rand(100000, 9999999);
-				if(!$path){
-					$path = CAPI_DIR . '/temp';
-					$path_url = home_url() . '/temp';
-				}
-				$path = rtrim(rtrim($path, '/'),'\\');
-				if(!file_exists($path)){
-					mkdir($path);	
-				}
-				$image_dir =  $path . '/' . str_replace(' ','-',str_replace('  ',' ',$name . '-' . 'روح القصيد' . '.jpg'));
-				$image_url =  $path_url . '/' . str_replace(' ','-',str_replace('  ',' ',$name . '-' . 'روح القصيد' . '.jpg'));
-				$imageData = $_POST['image_data'];
-				// return $imageData;
-				if($imageData){
-					rooh::saveImage($imageData, $image_dir);
-				}
-				$result = array(
-					'image_url' => $image_url,
-					'image_dir' => $image_dir,
-				);
-				return $result;
-			}else{
-				return false;
-			}
-		}
-		//////////////////////////////////////////////////////////////////////////////////////////////
-		public static function saveImage( $imageData, $dest, $qual = 100 ){
-			$imageData = str_replace('data:image/jpeg;base64,','',$imageData);
-			$imageData = base64_decode($imageData);
-			$source = imagecreatefromstring($imageData);
-			$imageSave = imagejpeg($source,$dest,$qual);
-			imagedestroy($source);
-		}
-		//////////////////////////////////////////////////////////////////////////////////////////////
-		public static function setImage($post_id,$image_url,$image_name = false,$data = false){
-			$upload_dir = wp_upload_dir();
-			if($data !== false){
-				$image_data = $data;
-			}else{
-				$image_data = file_get_contents($image_url);
-			}
-			if(!$image_name) $image_name = basename( $image_url );
-			$filename         = basename( $unique_file_name );
-			$unique_file_name = wp_unique_filename( $upload_dir['path'], $image_name );
-			$filename         = basename( $unique_file_name );
-
-			if( wp_mkdir_p( $upload_dir['path'] ) ) {
-				$file = $upload_dir['path'] . '/' . $filename;
-			} else {
-				$file = $upload_dir['basedir'] . '/' . $filename;
-			}
-			file_put_contents( $file, $image_data );
-			$wp_filetype = wp_check_filetype( $filename, null );
-			$attachment = array(
-				'post_mime_type' => $wp_filetype['type'],
-				'post_title'     => sanitize_file_name( $filename ),
-				'post_content'   => '',
-				'post_status'    => 'inherit'
-			);
-			$attach_id = wp_insert_attachment( $attachment, $file, $post_id );
-			require_once(ABSPATH . 'wp-admin/includes/image.php');
-			$attach_data = wp_generate_attachment_metadata( $attach_id, $file );
-			wp_update_attachment_metadata( $attach_id, $attach_data );
-			set_post_thumbnail( $post_id, $attach_id );
 		}
 
     } // end class
