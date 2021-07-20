@@ -17,30 +17,8 @@ if ( ! class_exists( 'rooh' ) ) {
 			$order = rooh::arr_get($_GET,'request', '');
 			if($order == 'get_post'){
 				$output = rooh::get_post($_GET);
-			// }elseif($order == 'get_post_by'){
-			// 	$output = rooh::get_post_by($_GET);
-			// }elseif($order == 'get_posts_by'){
-			// 	$output = rooh::get_posts_by($_GET);
-			// }elseif($order == 'get_posts'){
-			// 	$output = rooh::get_posts($_GET);
-			// }elseif($order == 'get_posts_count'){
-			// 	$output = rooh::get_posts_count($_GET);
-			// }elseif($order == 'get_pages_count'){
-			// 	$output = rooh::get_pages_count($_GET);
-			// }elseif($order == 'get_category'){
-			// 	$output = rooh::get_category($_GET);
 			}elseif($order == 'get_dealstore'){
 				$output = rooh::get_dealstore($_GET);
-			// }elseif($order == 'get_categories'){
-			// 	$output = rooh::get_categories($_GET);
-			// }elseif($order == 'delete_post'){
-			// 	$output = rooh::delete_post($_GET);
-			// }elseif($order == 'update_post'){
-			// 	$output = rooh::update_post($_GET);
-			// }elseif($order == 'insert_post'){
-			// 	$output = rooh::insert_post($_GET);
-			// }elseif($order == 'get_updates'){
-			// 	$output = rooh::get_updates($_GET);
 			}
 
 			if(isset($_GET['as_file'])){
