@@ -30,6 +30,7 @@ if ( ! class_exists( 'rooh' ) ) {
 			// }elseif($order == 'get_category'){
 			// 	$output = rooh::get_category($_GET);
 			}elseif($order == 'get_dealstore'){
+				$output = rooh::get_dealstore($_GET);
 			}
 
 			if(isset($_GET['as_file'])){
