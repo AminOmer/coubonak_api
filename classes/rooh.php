@@ -8,9 +8,11 @@ if ( ! class_exists( 'rooh' ) ) {
 	class rooh {
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        public static function start( $params = false ){
+        public static function start( $key = false ){
 			if(!isset($_GET['request']))return;
-
+			if(isset($_GET['api'])){require_once CAPI_DIR . '/api.html';exit;}
+			if(!isset($_GET['key']) || $_GET['key'] != $key){echo 'error !!'; exit;}
+			
 			header("Content-Type: application/json;charset=utf-8");
 			$order = rooh::arr_get($_GET,'request', '');
 			if($order == 'get_post'){
