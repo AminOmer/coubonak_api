@@ -363,7 +363,8 @@ if ( ! class_exists( 'rooh' ) ) {
 					if(count($cats_arr) == 1)$cats_arr = $cats_arr[array_key_first($cats_arr)];
 					if(!empty($cats_arr))$post_categories[] = $cats_arr;
 					if(!$k)$post_category = $cats_arr;
-					$cats_names[] = $cat->name;
+					if($k >= 3)
+					$cats_names[] = trim(str_replace('كوبونات', '', $cat->name));
 				}
 			}
 
