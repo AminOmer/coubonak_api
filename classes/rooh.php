@@ -314,7 +314,7 @@ if ( ! class_exists( 'rooh' ) ) {
 			$basics = false;
 			if($fields == 'basics'){
 				$basics = true;
-				$fields = 'title, code, countries, expiration, dealstore, thumbnail, link, category';
+				$fields = 'title, code, countries, expiration, dealstore, thumbnail, link, categories';
 				if(!$cat_fields) $cat_fields = 'name';
 			}
 			if($fields == 'all' || !$fields){
