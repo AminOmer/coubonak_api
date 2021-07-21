@@ -399,7 +399,7 @@ if ( ! class_exists( 'rooh' ) ) {
 			if(in_array('code', $fields)) $output['result']['code'] = $code;
 			if(in_array('countries', $fields)) $output['result']['countries'] = $countries;
 			if(in_array('expiration', $fields))	$output['result']['expiration'] = $expiration;
-			if(in_array('dealstore', $fields))	$output['result']['dealstore'] = $dealstore;
+			if(in_array('dealstore', $fields))	$output['result']['cat'] = $dealstore;
 			if(in_array('link', $fields)) $output['result']['link'] = $link;
 			if(in_array('post_date', $fields))$output['result']['post_date'] = $post->post_date;
 			if(in_array('post_date_gmt', $fields))$output['result']['post_date_gmt'] = $post->post_date_gmt;
