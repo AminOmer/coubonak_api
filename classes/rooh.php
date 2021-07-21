@@ -371,8 +371,8 @@ if ( ! class_exists( 'rooh' ) ) {
 					$this_country = array_map('trim', $this_country);
 
 					$this_country = array_intersect($this_country,$all_countries);
-					// if(!empty($this_country) && isset($this_country[0]))
-					$cats_names[] = $this_country;
+					if(!empty($this_country) && count($this_country) == 1 && isset($this_country[array_key_first($this_country)]))
+					$cats_names[] = $this_country[array_key_first($this_country)];
 				}
 			}
 
