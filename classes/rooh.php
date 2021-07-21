@@ -310,7 +310,7 @@ if ( ! class_exists( 'rooh' ) ) {
         public static function get_post( $params = false ){
 			$id		= rooh::arr_get($params,'id', false);
 			$fields	= rooh::arr_get($params,'fields', '');
-			$cat_fields	= rooh::arr_get($params,'cat_fields', '');
+			$cat_fields	= rooh::arr_get($params,'cat_fields', 'all');
 			$basics = false;
 			if($fields == 'basics'){
 				$basics = true;
