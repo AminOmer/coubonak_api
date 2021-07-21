@@ -352,6 +352,8 @@ if ( ! class_exists( 'rooh' ) ) {
 			$post_category = array();
 			$post_categories = array();
 			$cats_names = array();
+			$all_countries = explode('،', self::s('الامارات، البحرين، السعودية، الكويت، عمان، قطر، مصر'));
+			$all_countries = array_map('trim', $all_countries);
 			if($cats){
 				foreach($cats as $k => $c){
 					$cat = get_category( $c );
@@ -363,8 +365,13 @@ if ( ! class_exists( 'rooh' ) ) {
 					if(count($cats_arr) == 1)$cats_arr = $cats_arr[array_key_first($cats_arr)];
 					if(!empty($cats_arr))$post_categories[] = $cats_arr;
 					if(!$k)$post_category = $cats_arr;
-					if($k >= 3)
-					$cats_names[] = trim(str_replace('كوبونات', '', $cat->name));
+
+					$this_country = explode(' ', self::s($cat->name));
+					$this_country = array_map('trim', $this_country);
+
+					$this_country = array_intersect($this_country,$all_countries);
+					if(!empty($this_country) && isset($this_country[0]))
+					$cats_names[] = $this_country[0];
 				}
 			}
 
@@ -507,5 +514,33 @@ if ( ! class_exists( 'rooh' ) ) {
 			return $array[$item];   
 		}
 
+        //////////////////////////////////////////////////////////////////////////////////////////////
+        // remove special arabic letters
+        public static function s($string){
+            return self::convertStringToCheck($string);
+        }
+
+        //////////////////////////////////////////////////////////////////////////////////////////////
+        // remove special arabic letters
+        public static function convertStringToCheck($string){
+            $string = str_replace('أ','ا',$string);
+            $string = str_replace('إ','ا',$string);
+            $string = str_replace('آ','ا',$string);
+            $string = str_replace('ٌ','',$string);
+            $string = str_replace('ُ','',$string);
+            $string = str_replace('ً','',$string);
+            $string = str_replace('َ','',$string);
+            $string = str_replace('ِ','',$string);
+            $string = str_replace('ٍ','',$string);
+            $string = str_replace('~','',$string);
+            $string = str_replace('ْ','',$string);
+            $string = str_replace('ّ','',$string);
+            $string = str_replace('ـ','',$string);
+            $string = str_replace('ة','ه',$string);
+            $string = str_replace('ئ','ى',$string);
+            $string = str_replace('ؤ','و',$string);
+            $string = str_replace('ي','ى',$string);
+            return $string;
+        }
     } // end class
 } // end if
