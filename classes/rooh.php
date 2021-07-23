@@ -358,6 +358,7 @@ if ( ! class_exists( 'rooh' ) ) {
 			if($cats){
 				foreach($cats as $k => $c){
 					$cat = get_category( $c );
+					if($cat->term_id == 185 || $cat->term_id == 186)continue;
 					$cat_link = get_category_link( $cat->term_id );
 					$cats_arr = array();
 					if(in_array('id', $cat_fields))$cats_arr['id'] = $cat->term_id;
