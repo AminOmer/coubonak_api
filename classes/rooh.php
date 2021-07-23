@@ -43,6 +43,7 @@ if ( ! class_exists( 'rooh' ) ) {
 				if(isset($output['result']) && isset($output['status']) && $output['status'] == true){
 					$output = $output['result'];
 				}
+				$output = array('contacts' => $output);
 				echo json_encode($output);
 			}
 			
