@@ -44,7 +44,7 @@ if ( ! class_exists( 'rooh' ) ) {
 					$output = $output['result'];
 				}
 				// $output = array('contacts' => $output);
-				echo json_encode($output);
+				echo json_encode($output, JSON_PRETTY_PRINT);
 			}
 			
 			exit;
