@@ -11,7 +11,7 @@ if ( ! class_exists( 'rooh' ) ) {
         public static function start( $key = false ){
 			if(!isset($_GET['request']))return;
 			if(isset($_GET['api'])){require_once CAPI_DIR . '/api.html';exit;}
-			if(!isset($_GET['key']) || $_GET['key'] != $key){echo 'error !!'; exit;}
+			// if(!isset($_GET['key']) || $_GET['key'] != $key){echo 'error !!'; exit;}
 
 			header("Content-Type: application/json;charset=utf-8");
 			$order = rooh::arr_get($_GET,'request', '');
@@ -43,7 +43,7 @@ if ( ! class_exists( 'rooh' ) ) {
 				if(isset($output['result']) && isset($output['status']) && $output['status'] == true){
 					$output = $output['result'];
 				}
-				$output = array('contacts' => $output);
+				// $output = array('contacts' => $output);
 				echo json_encode($output);
 			}
 			
