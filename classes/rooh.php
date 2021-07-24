@@ -371,11 +371,13 @@ if ( ! class_exists( 'rooh' ) ) {
 					if(!$k)$post_category = $cats_arr;
 
 					$this_country = explode(' ', self::s($cat->name));
+					$this_country_ = explode(' ', $cat->name);
 					$this_country = array_map('trim', $this_country);
+					$this_country_ = array_map('trim', $this_country_);
 
 					$this_country = array_intersect($this_country,$all_countries);
 					if(!empty($this_country) && count($this_country) == 1 && isset($this_country[array_key_first($this_country)]))
-					$cats_names[] = $this_country[array_key_first($this_country)];
+					$cats_names[] = $this_country_[array_key_first($this_country)];
 					else $post_categories[] = $cat->name;
 				}
 			}
